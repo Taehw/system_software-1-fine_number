@@ -54,8 +54,10 @@ int isPrime(double number)
 
 // 중위 순회를 이용하여 노드 수를 계산하고 소수 개수를 출력하는 함수
 
-int inorderTraversal(Node* root) {
+int inorderTraversal(Node* root) 
+{
     static int nodeCount = 0;
+
     if (root != NULL) {
         nodeCount++;
         inorderTraversal(root->left);
@@ -75,15 +77,12 @@ int primenumber(Node* root)
         double minusOne = root->data - 1;
         
         // 계산한 값이 소수인지 판단하여 소수 개수 증가
-        if (isPrime(plusOne)) {
-            primeCount++;
-        }
-        if (isPrime(minusOne)) {
+        if (isPrime(plusOne) || isPrime(minusOne)) {
             primeCount++;
         }
         
-        inorderTraversal(root->left);
-        inorderTraversal(root->right);
+        primenumber(root->left);
+        primenumber(root->right);
     }
     
     return primeCount;
